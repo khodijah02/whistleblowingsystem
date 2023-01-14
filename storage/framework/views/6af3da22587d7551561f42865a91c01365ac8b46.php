@@ -17,7 +17,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
                             <a href="<?php echo e(asset('storage/'.$complaint->FILE)); ?>" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Bukti" download><i class="fa fa-download"></i></a>
-                            <button class="btn btn-outline-primary"><i class="fa fa-print"></i></button>
+                            <a href="<?php echo e(route('admin.complaint.print', $complaint->ID)); ?>" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Laporan" target="_blank"><i class="fa fa-print"></i></a>
                             <?php if($complaint->STATUS == 1): ?>
                             <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="proceed_complaint" data-id="<?php echo e($complaint->ID); ?>" data-status="2"><i class="fa fa-check"></i></button>
                             <?php elseif($complaint->STATUS == 2): ?>
@@ -81,7 +81,23 @@
                                     <td><?php echo e($complaint->NAMA_PELAPOR); ?></td>
                                 </tr>
                                 <tr>
-                                    <th>Alamat Pelapor</th>
+                                    <th>Provinsi</th>
+                                    <td><?php echo e($complaint->province->NAMA); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Kabupaten</th>
+                                    <td><?php echo e($complaint->regency->NAMA); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Kecamatan</th>
+                                    <td><?php echo e($complaint->district->NAMA); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Kelurahan</th>
+                                    <td><?php echo e($complaint->village->NAMA); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
                                     <td><?php echo e($complaint->ALAMAT); ?></td>
                                 </tr>
                             </table>

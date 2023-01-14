@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{asset('assets/images/logo/')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/logo/')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/logo/logo-rsud.png')}}" type="image/x-icon">
     <title>@yield('title')</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">

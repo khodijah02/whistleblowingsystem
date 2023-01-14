@@ -55,10 +55,13 @@ class ComplaintController extends Controller
     public function show($id)
     {
         $decrypt = Crypt::decryptString($id);
+
         $complaint = Complaint::where('ID', $decrypt)->first();
+        $complaint->ID = Crypt::encryptString($complaint->ID);
         $complaint->TANGGAL = Carbon::parse($complaint->TANGGAL)->isoFormat('D MMMM Y');
         $complaint->CREATED_AT = Carbon::parse($complaint->CREATED_AT)->isoFormat('D MMMM Y');
-        $data = ['complaint' => $complaint];
+
+        $data = ['complaint' => $complaint,];
         return view('admin.complaint.show', $data);
     }
 
@@ -66,6 +69,7 @@ class ComplaintController extends Controller
     {
         if ($request->ajax()) {
             $id = $request->get('id');
+            $decrypt = Crypt::decryptString($id);
             $status = $request->get('status');
 
             if ($status == 1) {
@@ -78,7 +82,7 @@ class ComplaintController extends Controller
                 $message = 'Laporan Ditolak';
             }
 
-            Complaint::where('ID', $id)->update([
+            Complaint::where('ID', $decrypt)->update([
                 'STATUS' => $status,
                 'KETERANGAN' => $message
             ]);
@@ -121,5 +125,17 @@ class ComplaintController extends Controller
     public function export(Request $request)
     {
         return Excel::download(new ComplaintExport($request->i_date, $request->e_date), 'complaint.xlsx');
+    }
+
+    public function print($id)
+    {
+        $decrypt = Crypt::decryptString($id);
+
+        $complaint = Complaint::where('ID', $decrypt)->first();
+        $complaint->TANGGAL = Carbon::parse($complaint->TANGGAL)->isoFormat('D MMMM Y');
+        $complaint->CREATED_AT = Carbon::parse($complaint->CREATED_AT)->isoFormat('D MMMM Y');
+
+        $data = ['complaint' => $complaint];
+        return view('export.complaint-print', $data);
     }
 }

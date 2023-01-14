@@ -19,7 +19,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
                             <a href="{{ asset('storage/'.$complaint->FILE) }}" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Bukti" download><i class="fa fa-download"></i></a>
-                            <button class="btn btn-outline-primary"><i class="fa fa-print"></i></button>
+                            <a href="{{ route('admin.complaint.print', $complaint->ID) }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Laporan" target="_blank"><i class="fa fa-print"></i></a>
                             @if ($complaint->STATUS == 1)
                             <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="proceed_complaint" data-id="{{ $complaint->ID }}" data-status="2"><i class="fa fa-check"></i></button>
                             @elseif($complaint->STATUS == 2)
@@ -83,7 +83,23 @@
                                     <td>{{ $complaint->NAMA_PELAPOR }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Alamat Pelapor</th>
+                                    <th>Provinsi</th>
+                                    <td>{{ $complaint->province->NAMA }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kabupaten</th>
+                                    <td>{{ $complaint->regency->NAMA }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kecamatan</th>
+                                    <td>{{ $complaint->district->NAMA }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kelurahan</th>
+                                    <td>{{ $complaint->village->NAMA }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
                                     <td>{{ $complaint->ALAMAT }}</td>
                                 </tr>
                             </table>
