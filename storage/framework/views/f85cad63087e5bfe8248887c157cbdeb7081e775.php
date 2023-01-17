@@ -2,19 +2,12 @@
 <section class="hero d-flex align-items-center">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <div class="col-lg-12 text-center d-flex flex-column justify-content-center">
                 <h1 data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di Website Pengaduan Pelanggaran RSUD Kota Bogor</h1>
                 <p data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
-                <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
-                    <div class="text-center text-lg-start">
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="<?php echo e(route('complaint.create')); ?>">Buat Pengaduan</a>
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="<?php echo e(route('complaint.show')); ?>">Lihat Pengaduan Saya</a>
-                    </div>
-                </div>
+                
             </div>
-            <div class="col-lg-6 hero-img" data-aos="zoom-out">
-                <img src="<?php echo e(asset('assets/images/landing/hero-img.png')); ?>" class="img-fluid" alt="">
-            </div>
+            
         </div>
     </div>
 </section>
