@@ -68,8 +68,8 @@
 
         $(document).on('click', '.proceed_complaint', function () {
             Swal.fire({
-                title: 'Ubah',
-                text: 'Status Laporan Akan Diubah',
+                title: 'Ubah Status?',
+                text: 'Laporan Akan Diproses',
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonText: 'Ya',

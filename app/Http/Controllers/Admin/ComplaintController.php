@@ -57,7 +57,18 @@ class ComplaintController extends Controller
                     })
                     ->addColumn('action', function($item) {
                         $encrypt = Crypt::encryptString($item->ID);
-                        return '<a class="btn btn-primary" href="'.route('admin.complaint.show', $encrypt).'">Detail</a>';
+                        return '
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Aksi
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encrypt.'" data-status="1">Batalkan Pengaduan</button></li>
+                                    <li><a class="dropdown-item" href="'.asset("storage/".$item->FILE).'" download>Download Bukti</a></li>
+                                    <li><a class="dropdown-item" href="'.route("admin.complaint.print", $encrypt).'" target="_blank">Print Pengaduan</a></li>
+                                </ul>
+                            </div>
+                        ';
                     })
                     ->rawColumns(['action', 'status'])->make();
         }

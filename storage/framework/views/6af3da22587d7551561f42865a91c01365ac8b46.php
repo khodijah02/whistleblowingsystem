@@ -166,60 +166,6 @@
                     location.reload()
                 })
             });
-
-            $('#proceed_complaint').on('click', function () {
-                Swal.fire({
-                    title: 'Ubah',
-                    text: "Status Laporan Akan Diubah",
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya',
-                    cancelButtonText: 'Tidak'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var id = $('#proceed_complaint').attr('data-id');
-                        var status = $('#proceed_complaint').attr('data-status');
-                        console.log(id);
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-
-                        $.ajax({
-                            type: "post",
-                            url: "<?php echo e(route('admin.complaint.update')); ?>",
-                            data: {
-                                id:id,
-                                status:status
-                            },
-                            dataType: "json",
-                            success: function (response) {
-                                if (response.code == 200) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Sukses',
-                                        text: 'Status Laporan Berhasil Diubah',
-                                    }).then((result) => {
-                                        location.reload()
-                                    });
-                                }
-                            },
-                            error: function (response) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Ada Kesalahan, Silahkan Hubungi SIMRS',
-                                    allowOutsideClick: false,
-                                    allowEscapeKey: false,
-                                }).then((result) => {
-                                    location.reload()
-                                });
-                            }
-                        });
-                    }
-                })
-            });
         });
     </script>
 <?php $__env->stopPush(); ?>

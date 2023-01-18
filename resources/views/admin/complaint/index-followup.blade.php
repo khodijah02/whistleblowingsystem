@@ -69,6 +69,64 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false},
             ],
         });
+
+        $(document).on('click', '.proceed_complaint', function () {
+            Swal.fire({
+                title: 'Ubah Status?',
+                text: 'Laporan Akan Dibatalkan',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).attr('data-id');
+                    var status = $(this).attr('data-status');
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('admin.complaint.update') }}",
+                        data: {
+                            id:id,
+                            status:status
+                        },
+                        dataType: "json",
+                        beforeSend: function (response) {
+                            $('#proceed_complaint').attr('disabled', 'disabled');
+                        },
+                        success: function (response) {
+                            if (response.code == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Ubah Status Sukses',
+                                    text: 'Laporan Dibatalkan',
+                                }).then((result) => {
+                                    location.reload()
+                                });
+                            }
+                            $('#proceed_complaint').removeAttr('disabled', 'disabled');
+                        },
+                        error: function (response) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Ada Kesalahan, Silahkan Hubungi SIMRS',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then((result) => {
+                                location.reload()
+                            });
+                        }
+                    });
+                }
+            })
+        });
     });
 </script>
 @endpush
