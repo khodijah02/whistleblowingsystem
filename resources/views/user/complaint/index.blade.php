@@ -5,14 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center d-flex flex-column justify-content-center">
-                <h1 data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di Website Pengaduan Pelanggaran RSUD Kota Bogor</h1>
-                <p data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
-                {{-- <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
-                    <div class="text-center text-lg-start">
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.create') }}">Buat Pengaduan</a>
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.show') }}">Lihat Pengaduan Saya</a>
-                    </div>
-                </div> --}}
+                <h1 style="font-size: 7vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di Website Pengaduan Pelanggaran RSUD Kota Bogor</h1>
+                <p style="font-size: 2vh" class="mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
+                <div class="text-center mx-auto text-lg-start" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
+                    <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.create') }}">Buat Pengaduan</a>
+                    <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.show') }}">Lihat Pengaduan</a>
+                </div>
             </div>
             {{-- <div class="col-lg-6 hero-img" data-aos="zoom-out">
                 <img src="{{asset('assets/images/landing/hero-img.png')}}" class="img-fluid" alt="">

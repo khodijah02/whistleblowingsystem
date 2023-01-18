@@ -7,11 +7,11 @@
          <div class="login-card">
             <div>
                 <div>
-                   {{-- <a class="logo" href="">
-                        <img class="img-fluid for-light" src="https://via.placeholder.com/305x60.png?text=RSUD+Kota+Bogor" alt="logorsud">
-                    </a> --}}
-                    <h1 style="text-align: center">WHISTLEBLOWING SYSTEM</h1>
-                    <h1 style="text-align: center">RSUD KOTA BOGOR</h1>
+                    <a class="logo" href="">
+                        <img class="img-fluid mb-3" src="{{ asset('assets/images/logo/logo-rsud.png') }}" alt="logorsud">
+                        <h4 style="text-align: center">WHISTLEBLOWING SYSTEM</h4>
+                        <h4 style="text-align: center">RSUD KOTA BOGOR</h4>
+                    </a>
                 </div>
                 <div class="login-main">
                     <form class="theme-form" action="{{ route('login') }}" method="post">

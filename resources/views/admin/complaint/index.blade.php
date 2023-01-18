@@ -15,17 +15,6 @@
                     <h5>Complaint Table</h5>
                 </div>
 				<div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-4">
-                            <select name="status_filter" id="status_filter" class="form-select">
-                                <option value="">-- Pilih Status Laporan --</option>
-                                <option value="1">Laporan Masuk</option>
-                                <option value="2">Laporan Diproses</option>
-                                <option value="3">Laporan Diterima</option>
-                                <option value="4">Laporan Ditolak</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="table-responsive mt-4">
                         <table class="display" id="complaint_table">
                             <thead>
@@ -35,7 +24,6 @@
                                     <th>Nama Terlapor</th>
                                     <th>Jenis Pelanggaran</th>
                                     <th>Tanggal Pelaporan</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -74,18 +62,67 @@
                 { data: 'NAMA_TERLAPOR', name: 'NAMA_TERLAPOR' },
                 { data: 'violation', name: 'violation' },
                 { data: 'date', name: 'date' },
-                { data: 'status', name: 'status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false},
             ],
         });
 
-        $('#status_filter').on('change', function () {
-            $('#complaint_table').on('preXhr.dt', function (e, settings, data) {
-                data.status = $('#status_filter').val();
-            });
-            $('#complaint_table').DataTable().ajax.reload();
-        });
+        $(document).on('click', '.proceed_complaint', function () {
+            Swal.fire({
+                title: 'Ubah',
+                text: 'Status Laporan Akan Diubah',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).attr('data-id');
+                    var status = $(this).attr('data-status');
 
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('admin.complaint.update') }}",
+                        data: {
+                            id:id,
+                            status:status
+                        },
+                        dataType: "json",
+                        beforeSend: function (response) {
+                            $('#proceed_complaint').attr('disabled', 'disabled');
+                        },
+                        success: function (response) {
+                            if (response.code == 200) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Ubah Status Sukses',
+                                    text: 'Laporan Dipindahkan ke Tindak Lanjut',
+                                }).then((result) => {
+                                    location.reload()
+                                });
+                            }
+                            $('#proceed_complaint').removeAttr('disabled', 'disabled');
+                        },
+                        error: function (response) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Ada Kesalahan, Silahkan Hubungi SIMRS',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then((result) => {
+                                location.reload()
+                            });
+                        }
+                    });
+                }
+            })
+        });
     });
 </script>
 @endpush

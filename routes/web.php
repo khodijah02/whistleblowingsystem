@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\ComplaintController;
@@ -24,6 +23,7 @@ Route::get('/complaint/search', [ComplaintController::class, 'show'])->name('com
 Route::get('/complaint/search/show', [ComplaintController::class, 'search'])->name('complaint.search');
 
 Route::get('/admin/complaint', [AdminComplaintController::class, 'index'])->middleware(['auth'])->name('admin.complaint');
+Route::get('/admin/complaint/follow-up', [AdminComplaintController::class, 'indexFollowUp'])->middleware(['auth'])->name('admin.complaint.followup');
 Route::get('/admin/complaint/show/{id}', [AdminComplaintController::class, 'show'])->middleware(['auth'])->name('admin.complaint.show');
 Route::post('/admin/complaint/update', [AdminComplaintController::class, 'update'])->name('admin.complaint.update');
 Route::get('/admin/complaint/report', [AdminComplaintController::class, 'report'])->middleware(['auth'])->name('admin.complaint.report');

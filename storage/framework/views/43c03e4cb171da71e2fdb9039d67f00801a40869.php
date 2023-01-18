@@ -26,11 +26,15 @@
 						</a>
 					</li>
                     <li class="sidebar-list mt-2">
+						<a class="sidebar-link sidebar-title link-nav <?php echo e(request()->is('admin/complaint/follow-up') ? 'active' : ''); ?>" href="<?php echo e(route('admin.complaint.followup')); ?>">
+							<i data-feather="edit-3"> </i><span>Tindak Lanjut</span>
+						</a>
+					</li>
+                    <li class="sidebar-list mt-2">
 						<a class="sidebar-link sidebar-title link-nav <?php echo e(request()->is('admin/complaint/report') ? 'active' : ''); ?>" href="<?php echo e(route('admin.complaint.report')); ?>">
 							<i data-feather="pie-chart"> </i><span>Rekapitulasi Laporan</span>
 						</a>
 					</li>
-                    
 				</ul>
 			</div>
 			<div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

@@ -26,21 +26,15 @@
 						</a>
 					</li>
                     <li class="sidebar-list mt-2">
+						<a class="sidebar-link sidebar-title link-nav {{ request()->is('admin/complaint/follow-up') ? 'active' : '' }}" href="{{ route('admin.complaint.followup') }}">
+							<i data-feather="edit-3"> </i><span>Tindak Lanjut</span>
+						</a>
+					</li>
+                    <li class="sidebar-list mt-2">
 						<a class="sidebar-link sidebar-title link-nav {{ request()->is('admin/complaint/report') ? 'active' : '' }}" href="{{ route('admin.complaint.report') }}">
 							<i data-feather="pie-chart"> </i><span>Rekapitulasi Laporan</span>
 						</a>
 					</li>
-                    {{-- <li class="sidebar-list mt-1">
-						<a class="sidebar-link sidebar-title {{ request()->is('admin/report-complaint/*') ? 'active' : '' }}" href="#">
-                            <i data-feather="pie-chart"></i><span>Rekapitulasi Laporan</span>
-							<div class="according-menu"><i class="fa fa-angle-{{ request()->is('admin/report-complaint/*') ? 'down' : 'right' }}"></i></div>
-						</a>
-						<ul class="sidebar-submenu" style="display: {{ request()->is('admin/report-complaint/*') ? 'block;' : 'none;' }}">
-							<li><a href="{{ route('admin.complaint.report.daily') }}" class="{{  Route::currentRouteName() == 'admin.complaint.report.daily' ? 'active' : ''  }}">Laporan Harian</a></li>
-							<li><a href="{{ route('admin.complaint.report.monthly') }}" class="{{  Route::currentRouteName() == 'admin.complaint.report.monthly' ? 'active' : ''  }}">Laporan Bulanan</a></li>
-                            <li><a href="{{ route('admin.complaint.report.annual') }}" class="{{  Route::currentRouteName() == 'admin.complaint.report.annual' ? 'active' : ''  }}">Laporan Tahunan</a></li>
-						</ul>
-					</li> --}}
 				</ul>
 			</div>
 			<div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

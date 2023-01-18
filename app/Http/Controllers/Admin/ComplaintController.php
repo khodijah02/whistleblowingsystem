@@ -19,11 +19,34 @@ class ComplaintController extends Controller
         if($request->ajax())
         {
             DB::statement(DB::raw('set @rownum=0'));
-            $status = $request->get('status');
-            $complaint = Complaint::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'ID', 'KODE_PENGADUAN', 'ID_PELANGGARAN', 'NAMA_TERLAPOR', 'CREATED_AT', 'STATUS'])
-                ->when($status, function($query) use($status) {
-                    return $query->where('STATUS', $status);
-                })->orderBy('CREATED_AT', 'desc')->get();
+            $complaint = Complaint::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'ID', 'KODE_PENGADUAN', 'ID_PELANGGARAN', 'NAMA_TERLAPOR', 'CREATED_AT'])
+                ->where('STATUS', 1)
+                ->orderBy('CREATED_AT', 'desc')->get();
+
+                return DataTables::of($complaint)
+                    ->addColumn('violation', function($item) {
+                        return $item->violation->NAMA;
+                    })
+                    ->addColumn('date', function($item) {
+                        return Carbon::parse($item->CREATED_AT)->isoFormat('D MMMM Y');
+                    })
+                    ->addColumn('action', function($item) {
+                        $encrypt = Crypt::encryptString($item->ID);
+                        return '<button class="btn btn-primary proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encrypt.'" data-status="2">Proses</button>';
+                    })
+                    ->rawColumns(['action', 'status'])->make();
+        }
+        return view('admin.complaint.index');
+    }
+
+    public function indexFollowUp(Request $request)
+    {
+        if($request->ajax())
+        {
+            DB::statement(DB::raw('set @rownum=0'));
+            $complaint = Complaint::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'ID', 'KODE_PENGADUAN', 'ID_PELANGGARAN', 'NAMA_TERLAPOR', 'CREATED_AT'])
+                ->where('STATUS', '!=', 1)
+                ->orderBy('CREATED_AT', 'desc')->get();
 
                 return DataTables::of($complaint)
                     ->addColumn('violation', function($item) {
@@ -36,20 +59,9 @@ class ComplaintController extends Controller
                         $encrypt = Crypt::encryptString($item->ID);
                         return '<a class="btn btn-primary" href="'.route('admin.complaint.show', $encrypt).'">Detail</a>';
                     })
-                    ->addColumn('status', function($item) {
-                        if ($item->STATUS == 1) {
-                            return '<span class="badge rounded-pill badge-warning">Laporan Masuk</span>';
-                        } else if ($item->STATUS == 2) {
-                            return '<span class="badge rounded-pill badge-primary">Laporan Diproses</span>';
-                        } else if ($item->STATUS == 3) {
-                            return '<span class="badge rounded-pill badge-success">Laporan Diterima</span>';
-                        } else {
-                            return '<span class="badge rounded-pill badge-danger">Laporan Ditolak</span>';
-                        }
-                    })
                     ->rawColumns(['action', 'status'])->make();
         }
-        return view('admin.complaint.index');
+        return view('admin.complaint.index-followup');
     }
 
     public function show($id)

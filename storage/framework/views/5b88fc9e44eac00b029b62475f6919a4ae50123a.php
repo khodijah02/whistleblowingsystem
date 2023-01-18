@@ -5,9 +5,11 @@
          <div class="login-card">
             <div>
                 <div>
-                   
-                    <h1 style="text-align: center">WHISTLEBLOWING SYSTEM</h1>
-                    <h1 style="text-align: center">RSUD KOTA BOGOR</h1>
+                    <a class="logo" href="">
+                        <img class="img-fluid mb-3" src="<?php echo e(asset('assets/images/logo/logo-rsud.png')); ?>" alt="logorsud">
+                        <h4 style="text-align: center">WHISTLEBLOWING SYSTEM</h4>
+                        <h4 style="text-align: center">RSUD KOTA BOGOR</h4>
+                    </a>
                 </div>
                 <div class="login-main">
                     <form class="theme-form" action="<?php echo e(route('login')); ?>" method="post">
