@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
+use App\Models\Province;
 use App\Models\Violation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,7 @@ class ComplaintController extends Controller
     public function create()
     {
         $violation = Violation::all();
-        $province = DB::table('provinsi')->get();
+        $province = Province::all();
         $complaintTicket = 'WBS'.date('Ymd').round(microtime(true) * 1000);
 
         $data = [

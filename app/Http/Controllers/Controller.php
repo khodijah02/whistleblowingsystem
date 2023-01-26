@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
+use App\Models\Regency;
+use App\Models\Village;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -17,7 +20,7 @@ class Controller extends BaseController
     {
         if ($request->ajax()) {
             $id = $request->data;
-            $regency = DB::table('kabupaten')->where('ID_PROVINSI', $id)->get();
+            $regency = Regency::where('ID_PROVINSI', $id)->get();
 
             return $regency;
         }
@@ -27,7 +30,7 @@ class Controller extends BaseController
     {
         if ($request->ajax()) {
             $id = $request->data;
-            $district = DB::table('kecamatan')->where('ID_KABUPATEN', $id)->get();
+            $district = District::where('ID_KABUPATEN', $id)->get();
 
             return $district;
         }
@@ -37,7 +40,7 @@ class Controller extends BaseController
     {
         if ($request->ajax()) {
             $id = $request->data;
-            $village = DB::table('kelurahan')->where('ID_KECAMATAN', $id)->get();
+            $village = Village::where('ID_KECAMATAN', $id)->get();
 
             return $village;
         }

@@ -12,7 +12,7 @@
     @include('layouts.landing.css')
     @stack('after-style')
   </head>
-  <body class="landing-page">
+  <body class="landing-page d-flex flex-column justify-content-between" style="min-height: 100vh">
     <header id="header" class="header fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="{{route('complaint.index')}}" class="logo d-flex align-items-center">

@@ -70,7 +70,7 @@
 
         $(document).on('click', '.proceed_complaint', function () {
             Swal.fire({
-                title: 'Ubah Status?',
+                title: 'Batalkan?',
                 text: 'Laporan Akan Dibatalkan',
                 icon: 'info',
                 showCancelButton: true,
@@ -102,7 +102,7 @@
                             if (response.code == 200) {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Ubah Status Sukses',
+                                    title: 'Sukses!',
                                     text: 'Laporan Dibatalkan',
                                 }).then((result) => {
                                     location.reload()

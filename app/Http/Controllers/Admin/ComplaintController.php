@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -56,16 +57,17 @@ class ComplaintController extends Controller
                         return Carbon::parse($item->CREATED_AT)->isoFormat('D MMMM Y');
                     })
                     ->addColumn('action', function($item) {
-                        $encrypt = Crypt::encryptString($item->ID);
+                        $encryptId = Crypt::encryptString($item->ID);
+                        $encryptFile = Crypt::encryptString($item->FILE);
                         return '
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Aksi
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encrypt.'" data-status="1">Batalkan Pengaduan</button></li>
-                                    <li><a class="dropdown-item" href="'.asset("storage/".$item->FILE).'" download>Download Bukti</a></li>
-                                    <li><a class="dropdown-item" href="'.route("admin.complaint.print", $encrypt).'" target="_blank">Print Pengaduan</a></li>
+                                    <li><button class="dropdown-item proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encryptId.'" data-status="1">Batalkan Pengaduan</button></li>
+                                    <li><a class="dropdown-item" href="'.route("admin.complaint.download", $encryptId).'" target="_blank">Download Pengaduan</a></li>
+                                    <li><a class="dropdown-item" href="'.route("admin.complaint.print", $encryptId).'" target="_blank">Print Pengaduan</a></li>
                                 </ul>
                             </div>
                         ';
@@ -73,19 +75,6 @@ class ComplaintController extends Controller
                     ->rawColumns(['action', 'status'])->make();
         }
         return view('admin.complaint.index-followup');
-    }
-
-    public function show($id)
-    {
-        $decrypt = Crypt::decryptString($id);
-
-        $complaint = Complaint::where('ID', $decrypt)->first();
-        $complaint->ID = Crypt::encryptString($complaint->ID);
-        $complaint->TANGGAL = Carbon::parse($complaint->TANGGAL)->isoFormat('D MMMM Y');
-        $complaint->CREATED_AT = Carbon::parse($complaint->CREATED_AT)->isoFormat('D MMMM Y');
-
-        $data = ['complaint' => $complaint,];
-        return view('admin.complaint.show', $data);
     }
 
     public function update(Request $request)
@@ -160,5 +149,17 @@ class ComplaintController extends Controller
 
         $data = ['complaint' => $complaint];
         return view('export.complaint-print', $data);
+    }
+
+    public function download($id)
+    {
+        $decrypt = Crypt::decryptString($id);
+        $complaint = Complaint::where('ID', $decrypt)->first();
+
+        if (Storage::exists($complaint->FILE)) {
+            return Storage::download($complaint->FILE);
+        } else {
+            return abort(404);
+        }
     }
 }

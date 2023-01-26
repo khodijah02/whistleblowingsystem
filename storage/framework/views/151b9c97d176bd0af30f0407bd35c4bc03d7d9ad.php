@@ -12,7 +12,7 @@
     <?php echo $__env->make('layouts.landing.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->yieldPushContent('after-style'); ?>
   </head>
-  <body class="landing-page">
+  <body class="landing-page d-flex flex-column justify-content-between" style="min-height: 100vh">
     <header id="header" class="header fixed-top">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="<?php echo e(route('complaint.index')); ?>" class="logo d-flex align-items-center">

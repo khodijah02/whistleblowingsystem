@@ -66,8 +66,8 @@
 
         $(document).on('click', '.proceed_complaint', function () {
             Swal.fire({
-                title: 'Ubah',
-                text: 'Status Laporan Akan Diubah',
+                title: 'Proses?',
+                text: 'Laporan Akan Diproses',
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonText: 'Ya',
@@ -98,8 +98,8 @@
                             if (response.code == 200) {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Ubah Status Sukses',
-                                    text: 'Laporan Dipindahkan ke Tindak Lanjut',
+                                    title: 'Sukses!',
+                                    text: 'Silahkan Proses Laporan di Menu Tindak Lanjut',
                                 }).then((result) => {
                                     location.reload()
                                 });

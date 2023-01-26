@@ -24,11 +24,11 @@ Route::get('/complaint/search/show', [ComplaintController::class, 'search'])->na
 
 Route::get('/admin/complaint', [AdminComplaintController::class, 'index'])->middleware(['auth'])->name('admin.complaint');
 Route::get('/admin/complaint/follow-up', [AdminComplaintController::class, 'indexFollowUp'])->middleware(['auth'])->name('admin.complaint.followup');
-Route::get('/admin/complaint/show/{id}', [AdminComplaintController::class, 'show'])->middleware(['auth'])->name('admin.complaint.show');
 Route::post('/admin/complaint/update', [AdminComplaintController::class, 'update'])->name('admin.complaint.update');
 Route::get('/admin/complaint/report', [AdminComplaintController::class, 'report'])->middleware(['auth'])->name('admin.complaint.report');
 Route::post('/admin/complaint/export', [AdminComplaintController::class, 'export'])->middleware(['auth'])->name('admin.complaint.export');
 Route::get('/admin/complaint/print/{id}', [AdminComplaintController::class, 'print'])->middleware(['auth'])->name('admin.complaint.print');
+Route::get('/admin/complaint/download/{id}', [AdminComplaintController::class, 'download'])->middleware(['auth'])->name('admin.complaint.download');
 
 Route::get('/get-regency', [Controller::class, 'getRegency'])->name('get.regency');
 Route::get('/get-district', [Controller::class, 'getDistrict'])->name('get.district');
