@@ -11,28 +11,50 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['create', 'login']]);
+    }
+
     public function create()
     {
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request)
+    public function login()
     {
-        $request->authenticate();
+        $credentials = request(['email', 'password']);
 
-        $request->session()->regenerate();
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return $this->respondWithToken($token);
     }
 
-    public function destroy(Request $request)
+    public function me()
     {
-        Auth::guard('web')->logout();
+        return response()->json(auth()->user());
+    }
 
-        $request->session()->invalidate();
+    public function logout()
+    {
+        auth()->logout();
 
-        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 
-        return redirect()->route('login');
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }

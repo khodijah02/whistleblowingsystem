@@ -35,11 +35,5 @@ Route::get('/get-regency', [Controller::class, 'getRegency'])->name('get.regency
 Route::get('/get-district', [Controller::class, 'getDistrict'])->name('get.district');
 Route::get('/get-village', [Controller::class, 'getVillage'])->name('get.village');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login-admns', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('/login-admns', [AuthenticatedSessionController::class, 'store']);
-});
+Route::get('/login-admns', [AuthenticatedSessionController::class, 'create'])->name('login');
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-});

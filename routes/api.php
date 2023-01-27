@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
+    Route::post('login', [AuthenticatedSessionController::class, 'login']);
+    Route::post('logout', [AuthenticatedSessionController::class, 'logout']);
+    Route::post('refresh', [AuthenticatedSessionController::class, 'refresh']);
+    Route::post('me', [AuthenticatedSessionController::class, 'me']);
 });
