@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ComplaintController as AdminComplaintController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\ComplaintController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,11 @@ Route::get('/get-regency', [Controller::class, 'getRegency'])->name('get.regency
 Route::get('/get-district', [Controller::class, 'getDistrict'])->name('get.district');
 Route::get('/get-village', [Controller::class, 'getVillage'])->name('get.village');
 
-require __DIR__.'/auth.php';
+Route::middleware('guest')->group(function () {
+    Route::get('/login-admns', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('/login-admns', [AuthenticatedSessionController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
