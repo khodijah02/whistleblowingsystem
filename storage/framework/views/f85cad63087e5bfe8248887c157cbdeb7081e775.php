@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 <main id="main">
     <section class="hero d-flex align-items-center">

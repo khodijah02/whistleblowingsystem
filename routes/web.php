@@ -23,13 +23,15 @@ Route::post('/complaint/store', [ComplaintController::class, 'store'])->name('co
 Route::get('/complaint/search', [ComplaintController::class, 'show'])->name('complaint.show');
 Route::get('/complaint/search/show', [ComplaintController::class, 'search'])->name('complaint.search');
 
-Route::get('/admin/complaint', [AdminComplaintController::class, 'index'])->middleware(['auth'])->name('admin.complaint');
-Route::get('/admin/complaint/follow-up', [AdminComplaintController::class, 'indexFollowUp'])->middleware(['auth'])->name('admin.complaint.followup');
-Route::post('/admin/complaint/update', [AdminComplaintController::class, 'update'])->name('admin.complaint.update');
-Route::get('/admin/complaint/report', [AdminComplaintController::class, 'report'])->middleware(['auth'])->name('admin.complaint.report');
-Route::post('/admin/complaint/export', [AdminComplaintController::class, 'export'])->middleware(['auth'])->name('admin.complaint.export');
-Route::get('/admin/complaint/print/{id}', [AdminComplaintController::class, 'print'])->middleware(['auth'])->name('admin.complaint.print');
-Route::get('/admin/complaint/download/{id}', [AdminComplaintController::class, 'download'])->middleware(['auth'])->name('admin.complaint.download');
+Route::middleware(['jwt.auth'])->group(function () {
+    Route::get('/admin/complaint', [AdminComplaintController::class, 'index'])->name('admin.complaint');
+    Route::get('/admin/complaint/follow-up', [AdminComplaintController::class, 'indexFollowUp'])->name('admin.complaint.followup');
+    Route::post('/admin/complaint/update', [AdminComplaintController::class, 'update'])->name('admin.complaint.update');
+    Route::get('/admin/complaint/report', [AdminComplaintController::class, 'report'])->name('admin.complaint.report');
+    Route::post('/admin/complaint/export', [AdminComplaintController::class, 'export'])->name('admin.complaint.export');
+    Route::get('/admin/complaint/print/{id}', [AdminComplaintController::class, 'print'])->name('admin.complaint.print');
+    Route::get('/admin/complaint/download/{id}', [AdminComplaintController::class, 'download'])->name('admin.complaint.download');
+});
 
 Route::get('/get-regency', [Controller::class, 'getRegency'])->name('get.regency');
 Route::get('/get-district', [Controller::class, 'getDistrict'])->name('get.district');

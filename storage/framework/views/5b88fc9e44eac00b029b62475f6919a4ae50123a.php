@@ -12,11 +12,11 @@
                     </a>
                 </div>
                 <div class="login-main">
-                    <form class="theme-form" action="<?php echo e(route('login')); ?>" method="post">
+                    <form class="theme-form" action="<?php echo e(route('jwt-login')); ?>" method="post">
                         <?php echo csrf_field(); ?>
                         <h4>Masukan Akun</h4>
                         <?php if(session('status')): ?>
-                            <div class="text-success">
+                            <div class="alert alert-success">
                                 <?php echo e(session('status')); ?>
 
                             </div>
@@ -49,5 +49,6 @@
    </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.authentication.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\wbs\resources\views/auth/login.blade.php ENDPATH**/ ?>

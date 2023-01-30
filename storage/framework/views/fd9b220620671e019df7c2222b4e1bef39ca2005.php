@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
 <main id="main">
     <section class="inner-page" style="margin-top: 100px">

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -21,40 +22,46 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function login()
+    public function login(Request $request)
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->only(['username', 'password']);
+            $validation = Validator::make(
+                $credentials,
+                [
+                    'username' => ['required', 'string'],
+                    'password' => ['required', 'string'],],
+                [
+                    'username.required' => 'Username harus diisi',
+                    'password.required' => 'Password harus diisi',
+                ]
+            );
 
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+            if ($validation->fails()) {
+                return response()->json([
+                    'status' => 400,
+                    'message' => $validation->errors()
+                ]);
+            }
 
-        return $this->respondWithToken($token);
-    }
+            try {
+                if (!$token = auth()->attempt($credentials)) {
+                    return response()->json([
+                        'status' => 402,
+                        'message' => auth()->user()
+                    ]);
+                }
+                $user = User::where('username', $credentials['username'])->where('password', Hash::make($credentials['password']))->first();
+                $t = auth()->login($user);
+                return response()->json([
+                    'status' => 200,
+                    'message' => $t,
+                ]);
+            } catch (JWTException $e) {
+                return response()->json([
+                    'status' => '500',
+                    'message' => $e
+                ]);
+            }
 
-    public function me()
-    {
-        return response()->json(auth()->user());
-    }
-
-    public function logout()
-    {
-        auth()->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh());
-    }
-
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
     }
 }

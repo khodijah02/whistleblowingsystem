@@ -216,7 +216,7 @@ class ComplaintController extends Controller
             'regency.required'              => 'Kabupaten harus diisi',
             'district.required'             => 'Kecamatan harus diisi',
             'village.required'              => 'Kelurahan harus diisi',
-            'reporter_name.required'        => 'Alamat pelapor harus diisi',
+            'reporter_address.required'     => 'Alamat pelapor harus diisi',
         ];
 
         return Validator::make($request->all(), $rules, $messages);

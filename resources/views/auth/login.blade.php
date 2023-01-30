@@ -14,11 +14,11 @@
                     </a>
                 </div>
                 <div class="login-main">
-                    <form class="theme-form" action="{{ route('login') }}" method="post">
+                    <form class="theme-form" action="{{ route('jwt-login') }}" method="post">
                         @csrf
                         <h4>Masukan Akun</h4>
                         @if (session('status'))
-                            <div class="text-success">
+                            <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
@@ -50,3 +50,4 @@
    </div>
 </div>
 @endsection
+
