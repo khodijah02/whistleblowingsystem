@@ -18,6 +18,7 @@
     <?php echo $__env->yieldContent('content'); ?>
     <!-- latest jquery-->
     <?php echo $__env->make('layouts.authentication.script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->yieldPushContent('after-script'); ?>
   </body>
 </html>
 <?php /**PATH D:\xampp\htdocs\wbs\resources\views/layouts/authentication/master.blade.php ENDPATH**/ ?>

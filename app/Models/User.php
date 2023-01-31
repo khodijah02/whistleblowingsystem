@@ -16,10 +16,11 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'username',
         'password',
+        'remember_token'
     ];
 
     protected $hidden = [
-        'password'
+        'password', 'remember_token'
     ];
 
     public function getJWTIdentifier()

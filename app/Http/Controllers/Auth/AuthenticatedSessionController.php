@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,44 +22,39 @@ class AuthenticatedSessionController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only(['username', 'password']);
-            $validation = Validator::make(
-                $credentials,
-                [
-                    'username' => ['required', 'string'],
-                    'password' => ['required', 'string'],],
-                [
-                    'username.required' => 'Username harus diisi',
-                    'password.required' => 'Password harus diisi',
-                ]
-            );
-
+        try {
+            $validation = $this->validation($request);
             if ($validation->fails()) {
-                return response()->json([
-                    'status' => 400,
-                    'message' => $validation->errors()
-                ]);
+                return response()->json(['status' => 400,'message' => 'Username dan Password Harus Diisi']);
+            } else if (!$token = auth()->attempt($request->only(['username', 'password']))) {
+                return response()->json(['status' => 401,'message' => 'Username atau Password Salah']);
             }
+            return response()->json([
+                'status' => 200,
+                'message' => $token,
+            ]);
+        } catch (JWTException $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e
+            ]);
+        }
 
-            try {
-                if (!$token = auth()->attempt($credentials)) {
-                    return response()->json([
-                        'status' => 402,
-                        'message' => auth()->user()
-                    ]);
-                }
-                $user = User::where('username', $credentials['username'])->where('password', Hash::make($credentials['password']))->first();
-                $t = auth()->login($user);
-                return response()->json([
-                    'status' => 200,
-                    'message' => $t,
-                ]);
-            } catch (JWTException $e) {
-                return response()->json([
-                    'status' => '500',
-                    'message' => $e
-                ]);
-            }
+    }
 
+    public function validation(Request $request)
+    {
+        $validation = Validator::make(
+            $request->only(['username', 'password']),
+            [
+                'username' => ['required', 'string'],
+                'password' => ['required', 'string'],],
+            [
+                'username.required' => 'Username harus diisi',
+                'password.required' => 'Password harus diisi',
+            ]
+        );
+
+        return $validation;
     }
 }

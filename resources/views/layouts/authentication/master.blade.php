@@ -18,5 +18,6 @@
     @yield('content')
     <!-- latest jquery-->
     @include('layouts.authentication.script')
+    @stack('after-script')
   </body>
 </html>
