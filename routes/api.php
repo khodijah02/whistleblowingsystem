@@ -14,8 +14,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-    Route::post('login', [AuthenticatedSessionController::class, 'login'])->name('jwt-login');
-    Route::post('logout', [AuthenticatedSessionController::class, 'logout'])->name('jwt-logout');
-});

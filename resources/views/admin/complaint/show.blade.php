@@ -1,25 +1,27 @@
-<?php $__env->startSection('title', 'Dashboard'); ?>
+@extends('layouts.admin.master')
 
-<?php $__env->startSection('breadcrumb-title'); ?>
+@section('title', 'Dashboard')
+
+@section('breadcrumb-title')
 <h3>Complaint Detail</h3>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('breadcrumb-items'); ?>
+@section('breadcrumb-items')
 <li class="breadcrumb-item"><a href=""> Complaint Detail</i></a></li>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('content'); ?>
+@section('content')
 <div class="container-fluid">
 	<div class="row">
         <div class="col-12">
 			<div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                 <div class="card-header">
                     <div class="btn-group">
-                        <a href="<?php echo e(route('admin.complaint.download', $id)); ?>" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Bukti" download><i class="fa fa-download"></i></a>
-                        <a href="<?php echo e(route('admin.complaint.print', $id)); ?>" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Laporan" target="_blank"><i class="fa fa-print"></i></a>
-                        <?php if($complaint->STATUS == 1): ?>
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="proceed_complaint" data-id="<?php echo e($id); ?>" data-status="2"><i class="fa fa-check"></i></button>
-                        <?php endif; ?>
+                        <a href="{{ route('admin.complaint.download', $id) }}" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Bukti" download><i class="fa fa-download"></i></a>
+                        <a href="{{ route('admin.complaint.print', $id) }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Laporan" target="_blank"><i class="fa fa-print"></i></a>
+                        @if ($complaint->STATUS == 1)
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="proceed_complaint" data-id="{{ $id }}" data-status="2"><i class="fa fa-check"></i></button>
+                        @endif
 
                     </div>
                 </div>
@@ -32,58 +34,58 @@
                                 </tr>
                                 <tr>
                                     <th>Tanggal Pengaduan</th>
-                                    <td><?php echo e($complaint->CREATED_AT); ?></td>
+                                    <td>{{ $complaint->CREATED_AT }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kode Pengaduan</th>
-                                    <td><?php echo e($complaint->KODE_PENGADUAN); ?></td>
+                                    <td>{{ $complaint->KODE_PENGADUAN }}</td>
                                 </tr>
                                 <tr>
                                     <th>Jenis Pelanggaran</th>
-                                    <td><?php echo e($complaint->violation->NAMA); ?></td>
+                                    <td>{{ $complaint->violation->NAMA }}</td>
                                 </tr>
                                 <tr>
                                     <th>Nama Terlapor</th>
-                                    <td><?php echo e($complaint->NAMA_TERLAPOR); ?></td>
+                                    <td>{{ $complaint->NAMA_TERLAPOR }}</td>
                                 </tr>
                                 <tr>
                                     <th>Tanggal Perkiraan Kejadian</th>
-                                    <td><?php echo e($complaint->TANGGAL); ?></td>
+                                    <td>{{ $complaint->TANGGAL }}</td>
                                 </tr>
                                 <tr>
                                     <th>Lokasi Kejadian</th>
-                                    <td><?php echo e($complaint->LOKASI); ?></td>
+                                    <td>{{ $complaint->LOKASI }}</td>
                                 </tr>
                                 <tr>
                                     <th>Uraian Kejadian</th>
-                                    <td><?php echo e($complaint->URAIAN); ?></td>
+                                    <td>{{ $complaint->URAIAN }}</td>
                                 </tr>
                                 <tr>
                                     <th colspan="2"><h5>Data Pelapor</h5></th>
                                 </tr>
                                 <tr>
                                     <th>Nama Pelapor</th>
-                                    <td><?php echo e($complaint->NAMA_PELAPOR); ?></td>
+                                    <td>{{ $complaint->NAMA_PELAPOR }}</td>
                                 </tr>
                                 <tr>
                                     <th>Provinsi</th>
-                                    <td><?php echo e($complaint->province->NAMA); ?></td>
+                                    <td>{{ $complaint->province->NAMA }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kabupaten</th>
-                                    <td><?php echo e($complaint->regency->NAMA); ?></td>
+                                    <td>{{ $complaint->regency->NAMA }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kecamatan</th>
-                                    <td><?php echo e($complaint->district->NAMA); ?></td>
+                                    <td>{{ $complaint->district->NAMA }}</td>
                                 </tr>
                                 <tr>
                                     <th>Kelurahan</th>
-                                    <td><?php echo e($complaint->village->NAMA); ?></td>
+                                    <td>{{ $complaint->village->NAMA }}</td>
                                 </tr>
                                 <tr>
                                     <th>Alamat</th>
-                                    <td><?php echo e($complaint->ALAMAT); ?></td>
+                                    <td>{{ $complaint->ALAMAT }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -93,13 +95,13 @@
 		</div>
 	</div>
 </div>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startPush('after-css'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.css')); ?>">
-<?php $__env->stopPush(); ?>
+@push('after-css')
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+@endpush
 
-<?php $__env->startPush('after-script'); ?>
+@push('after-script')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
@@ -124,7 +126,7 @@
 
                         $.ajax({
                             type: "post",
-                            url: "<?php echo e(route('admin.complaint.update')); ?>",
+                            url: "{{ route('admin.complaint.update') }}",
                             data: {
                                 id:id,
                                 status:status
@@ -137,7 +139,7 @@
                                         title: 'Sukses',
                                         text: 'Silhkan Cek Menu Tindak Lanjut',
                                     }).then((result) => {
-                                        window.location.href = "<?php echo e(route('admin.complaint.followup')); ?>"
+                                        window.location.href = "{{ route('admin.complaint.followup') }}"
                                     });
                                 }
                             },
@@ -158,7 +160,5 @@
             });
         });
     </script>
-<?php $__env->stopPush(); ?>
+@endpush
 
-
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\wbs\resources\views/admin/complaint/show.blade.php ENDPATH**/ ?>

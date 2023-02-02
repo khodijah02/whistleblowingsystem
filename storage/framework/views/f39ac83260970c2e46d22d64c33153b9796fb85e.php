@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Dashboard'); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
@@ -16,7 +14,7 @@
                 </div>
 				<div class="card-body">
                     <div class="table-responsive mt-4">
-                        <table class="display" id="complaint_table">
+                        <table class="display" id="complaint-table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -48,13 +46,16 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function () {
-        $('#complaint_table').DataTable({
+        $('#complaint-table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ordering: true,
             ajax: {
                 url: '<?php echo url()->current(); ?>',
+                beforeSend: function (response) {
+                    response.setRequestHeader('Authorization', localStorage.getItem('token'));
+                },
             },
             columns: [
                 { data: 'rownum', name: 'rownum' },
@@ -65,7 +66,6 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false},
             ],
         });
-
         $(document).on('click', '.proceed_complaint', function () {
             Swal.fire({
                 title: 'Proses?',

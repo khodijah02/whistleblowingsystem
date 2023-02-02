@@ -3,58 +3,37 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['create', 'login']]);
-    }
-
     public function create()
     {
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function store(LoginRequest $request)
     {
-        try {
-            $validation = $this->validation($request);
-            if ($validation->fails()) {
-                return response()->json(['status' => 400,'message' => 'Username dan Password Harus Diisi']);
-            } else if (!$token = auth()->attempt($request->only(['username', 'password']))) {
-                return response()->json(['status' => 401,'message' => 'Username atau Password Salah']);
-            }
-            return response()->json([
-                'status' => 200,
-                'message' => $token,
-            ]);
-        } catch (JWTException $e) {
-            return response()->json([
-                'status' => 500,
-                'message' => $e
-            ]);
-        }
+        $request->authenticate();
 
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function validation(Request $request)
+    public function destroy(Request $request)
     {
-        $validation = Validator::make(
-            $request->only(['username', 'password']),
-            [
-                'username' => ['required', 'string'],
-                'password' => ['required', 'string'],],
-            [
-                'username.required' => 'Username harus diisi',
-                'password.required' => 'Password harus diisi',
-            ]
-        );
+        Auth::guard('web')->logout();
 
-        return $validation;
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 }

@@ -11,18 +11,10 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Yajra\DataTables\Facades\DataTables;
 
 class ComplaintController extends Controller
 {
-    protected $user;
-
-    public function __construct()
-    {
-        $this->user = JWTAuth::parseToken()->authenticate();
-    }
-
     public function index(Request $request)
     {
         if($request->ajax())
@@ -30,7 +22,7 @@ class ComplaintController extends Controller
             DB::statement(DB::raw('set @rownum=0'));
             $complaint = Complaint::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'ID', 'KODE_PENGADUAN', 'ID_PELANGGARAN', 'NAMA_TERLAPOR', 'CREATED_AT'])
                 ->where('STATUS', 1)
-                ->orderBy('CREATED_AT', 'desc')->get();
+                ->orderBy('CREATED_AT', 'desc');
 
                 return DataTables::of($complaint)
                     ->addColumn('violation', function($item) {
@@ -41,7 +33,7 @@ class ComplaintController extends Controller
                     })
                     ->addColumn('action', function($item) {
                         $encrypt = Crypt::encryptString($item->ID);
-                        return '<button class="btn btn-primary proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encrypt.'" data-status="2">Proses</button>';
+                        return '<a href="'.route('admin.complaint.show', $encrypt).'" class="btn btn-primary">Detail</a>';
                     })
                     ->rawColumns(['action', 'status'])->make();
         }
@@ -55,7 +47,7 @@ class ComplaintController extends Controller
             DB::statement(DB::raw('set @rownum=0'));
             $complaint = Complaint::select([DB::raw('@rownum  := @rownum  + 1 AS rownum'), 'ID', 'KODE_PENGADUAN', 'ID_PELANGGARAN', 'NAMA_TERLAPOR', 'CREATED_AT'])
                 ->where('STATUS', '!=', 1)
-                ->orderBy('CREATED_AT', 'desc')->get();
+                ->orderBy('CREATED_AT', 'desc');
 
                 return DataTables::of($complaint)
                     ->addColumn('violation', function($item) {
@@ -65,24 +57,25 @@ class ComplaintController extends Controller
                         return Carbon::parse($item->CREATED_AT)->isoFormat('D MMMM Y');
                     })
                     ->addColumn('action', function($item) {
-                        $encryptId = Crypt::encryptString($item->ID);
-                        $encryptFile = Crypt::encryptString($item->FILE);
-                        return '
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Aksi
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item proceed_complaint" type="button" id="proceed_complaint" data-id="'.$encryptId.'" data-status="1">Batalkan Pengaduan</button></li>
-                                    <li><a class="dropdown-item" href="'.route("admin.complaint.download", $encryptId).'" target="_blank">Download Pengaduan</a></li>
-                                    <li><a class="dropdown-item" href="'.route("admin.complaint.print", $encryptId).'" target="_blank">Print Pengaduan</a></li>
-                                </ul>
-                            </div>
-                        ';
+                        $encrypt = Crypt::encryptString($item->ID);
+                        return '<a href="'.route('admin.complaint.show', $encrypt).'" class="btn btn-primary">Detail</a>';
                     })
                     ->rawColumns(['action', 'status'])->make();
         }
         return view('admin.complaint.index-followup');
+    }
+
+    public function show($id)
+    {
+        $decrypt = Crypt::decryptString($id);
+
+        $complaint = Complaint::where('ID', $decrypt)->first();
+        $complaint->ID = Crypt::encryptString($complaint->ID);
+        $complaint->TANGGAL = Carbon::parse($complaint->TANGGAL)->isoFormat('D MMMM Y');
+        $complaint->CREATED_AT = Carbon::parse($complaint->CREATED_AT)->isoFormat('D MMMM Y');
+
+        $data = ['complaint' => $complaint,'id' => $id];
+        return view('admin.complaint.show', $data);
     }
 
     public function update(Request $request)
@@ -93,13 +86,11 @@ class ComplaintController extends Controller
             $status = $request->get('status');
 
             if ($status == 1) {
-                $message = 'Laporan Akan Segera Diproses';
+                $message = 'Laporan Akan Diproses';
             } else if ($status == 2) {
-                $message = 'SPI Sedang Observasi Laporan';
-            } else if ($status == 3) {
-                $message = 'Laporan Diterima';
+                $message = 'Laporan Sedang Diproses';
             } else {
-                $message = 'Laporan Ditolak';
+                $message = 'Laporan Diterima';
             }
 
             Complaint::where('ID', $decrypt)->update([

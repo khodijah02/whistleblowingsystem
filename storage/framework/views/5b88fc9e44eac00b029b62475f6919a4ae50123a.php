@@ -12,19 +12,34 @@
                     </a>
                 </div>
                 <div class="login-main">
-                    <form class="theme-form" id="form-auth" method="post">
+                    <form class="theme-form" action="<?php echo e(route('login')); ?>" method="post">
+                        <?php echo csrf_field(); ?>
                         <h4>Masukan Akun</h4>
-                        <div id="error_message"></div>
+                        <?php if(session('status')): ?>
+                            <div class="text-success">
+                                <?php echo e(session('status')); ?>
+
+                            </div>
+                        <?php endif; ?>
+                        <?php if($errors->any()): ?>
+                            <div class="alert alert-danger mt-3">
+                                <ul style="margin: 0;">
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $e): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><?php echo e($e); ?></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                         <div class="form-group">
                             <label class="col-form-label">Username</label>
-                            <input class="form-control" type="text" name="username" id="username">
+                            <input class="form-control" type="text" name="username" >
                         </div>
                         <div class="form-group">
                             <label class="col-form-label">Password</label>
-                            <input class="form-control" type="password" name="password" id="password">
+                            <input class="form-control" type="password" name="password" >
                         </div>
                         <div class="form-group mb-0 mt-4">
-                            <button id="submit" class="btn btn-primary btn-block" type="submit">Masuk</button>
+                            <button class="btn btn-primary btn-block" type="submit">Masuk</button>
                         </div>
                     </form>
                 </div>
@@ -34,78 +49,6 @@
    </div>
 </div>
 <?php $__env->stopSection(); ?>
-
-<?php $__env->startPush('after-script'); ?>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(document).ready(function () {
-            $('#form-auth').submit(function (e) {
-                e.preventDefault();
-                var username = $('#username').val();
-                var password = $('#password').val();
-
-               $.ajax({
-                type: "post",
-                url: "<?php echo e(route('jwt-login')); ?>",
-                data: {
-                    username:username,
-                    password:password,
-                },
-                dataType: "json",
-                beforeSend: function (response) {
-                    $('#submit').attr('disabled', 'disabled');
-                },
-                success: function (response) {
-                    if (response.status == 400 || response.status == 401 || response.status == 500) {
-                        $('#error_message').html('');
-                        $('#error_message').addClass('alert alert-danger');
-                        $('#error_message').append('<span>'+response.message+'</span><br>');
-                    } else {
-                        var token = response.message;
-                        localStorage.setItem('Authorization', token);
-                        console.log(localStorage.getItem('Authorization'));
-                        Swal.fire({
-                            title: 'Sukses',
-                            text: 'Login Sukses',
-                            icon: 'info',
-                            showCancelButton: false,
-                            confirmButtonText: 'Ya',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                $.ajax({
-                                    type: "get",
-                                    url: "<?php echo e(route('admin.complaint')); ?>",
-                                    headers: {
-                                        "Authorization": 'Bearer '+token
-                                    },
-                                    success: function (response) {
-                                        window.location.href = "<?php echo e(route('admin.complaint')); ?>"
-                                    },
-                                    error: function (response) {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: 'Ada Kesalahan, Silahkan Hubungi SIMRS',
-                                            allowOutsideClick: false,
-                                            allowEscapeKey: false,
-                                        }).then((result) => {
-                                            location.reload()
-                                        });
-                                    }
-                                });
-                            }
-                        })
-                    }
-                    $('#submit').removeAttr('disabled', 'disabled');
-                },
-                error: function (response) {
-
-                }
-               });
-            });
-        });
-    </script>
-<?php $__env->stopPush(); ?>
 
 
 <?php echo $__env->make('layouts.authentication.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\wbs\resources\views/auth/login.blade.php ENDPATH**/ ?>

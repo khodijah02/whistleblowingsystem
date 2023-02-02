@@ -6,7 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center d-flex flex-column justify-content-center">
-                    <h1 style="font-size: 7vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di Whistleblowing System RSUD Kota Bogor</h1>
+                    <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di </h1>
+                    <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Whistleblowing System RSUD Kota Bogor</h1>
                     <p style="font-size: 2vh" class="mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
                     <div class="text-center mx-auto text-lg-start" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
                         <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.create') }}">Buat Pengaduan</a>
@@ -22,8 +23,8 @@
             <div class="row gx-0">
                 <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
                     <div class="content">
-                        <h2>DEFINISI WHISTLEBLOWING SYSTEM</h3>
-                        <p>Mekanisme penyampaian pengaduan dugaan tindak pidana tertentu yang telah terjadi atau akan terjadi yang melibatkan pegawai dan orang lain yang yang dilakukan dalam organisasi tempatnya bekerja, dimana pelapor bukan merupakan bagian dari pelaku kejahatan yang dilaporkannya.</p>
+                        <h2>DEFINISI WHISTLEBLOWING SYSTEM</h2>
+                        <p style="font-size: 2vh">Mekanisme penyampaian pengaduan dugaan tindak pidana tertentu yang telah terjadi atau akan terjadi yang melibatkan pegawai dan orang lain yang yang dilakukan dalam organisasi tempatnya bekerja, dimana pelapor bukan merupakan bagian dari pelaku kejahatan yang dilaporkannya.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-anchor-placement="top-bottom">

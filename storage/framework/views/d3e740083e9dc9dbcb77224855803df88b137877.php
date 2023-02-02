@@ -57,7 +57,7 @@
                     error: function (response) {
                         Swal.fire({
                             title: 'Ooops',
-                            text: 'Ada Kesalahan, Silahkan hubungi SIMRS',
+                            text: 'Ada Kesalahan, Silahkan hubungi Pihak RSUD Kota Bogor',
                             icon: 'error',
                             allowOutsideClick: false,
                             allowEscapeKey: false,

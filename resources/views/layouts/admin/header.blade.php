@@ -25,7 +25,7 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
-                            <form action="{{ route('logout') }}" method="post">
+                            <form action="" method="post">
                                 @csrf
                                 <button type="submit" style="all: unset; cursor: pointer;"><i data-feather="log-out"> </i><span>Keluar</span></button>
                             </form>

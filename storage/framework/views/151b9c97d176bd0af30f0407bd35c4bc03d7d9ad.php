@@ -17,7 +17,6 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="<?php echo e(route('complaint.index')); ?>" class="logo d-flex align-items-center">
                 <img src="<?php echo e(asset('assets/images/logo/logo-rsud.png')); ?>" alt="">
-                <span>Whistleblowing</span>
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
