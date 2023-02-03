@@ -44,7 +44,7 @@
                                     <label for="file">Lampiran Bukti</label>
                                     <input name="file" type="file" id="file" class="form-control">
                                     <small class="text-danger">File Lampiran Bukti Maksimal 10 mb</small><br>
-                                    <small class="text-danger">Format File Yang Bisa Diupload Adalah .zip, .rar, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .avi, .mp4, .3gp, .mp3</small>
+                                    <small class="text-danger">Format File Yang Bisa Diupload Adalah .doc, .docx, .xls, .xlsx, .pdf, .jpg, .jpeg, .png, .avi, .mp4, .3gp, .mp3</small>
                                 </div>
                             </div>
                         </div>

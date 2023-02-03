@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 <main id="main">
     <section class="inner-page" style="margin-top: 100px">
@@ -44,7 +42,7 @@
                                     <label for="file">Lampiran Bukti</label>
                                     <input name="file" type="file" id="file" class="form-control">
                                     <small class="text-danger">File Lampiran Bukti Maksimal 10 mb</small><br>
-                                    <small class="text-danger">Format File Yang Bisa Diupload Adalah .zip, .rar, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .jpg, .jpeg, .png, .avi, .mp4, .3gp, .mp3</small>
+                                    <small class="text-danger">Format File Yang Bisa Diupload Adalah .doc, .docx, .xls, .xlsx, .pdf, .jpg, .jpeg, .png, .avi, .mp4, .3gp, .mp3</small>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +153,7 @@
                     error: function (response) {
                         Swal.fire({
                             title: 'Ooops',
-                            text: 'Ada Kesalahan, Silahkan hubungi SIMRS',
+                            text: 'Ada Kesalahan, Silahkan hubungi Pihak RSUD Kota Bogor',
                             icon: 'error',
                             allowOutsideClick: false,
                             allowEscapeKey: false,

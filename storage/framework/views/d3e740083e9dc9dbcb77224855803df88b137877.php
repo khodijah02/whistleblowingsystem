@@ -12,7 +12,7 @@
                     <form method="get" id="complaint_form" class="php-email-form mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                         <div class="row gy-4">
                             <div class="form-group col-md-11 mb-2 mt-4">
-                                <input class="form-control" id="complaint_ticket" type="text" name="complaint_ticket" placeholder="Masukan Nomor Pengaduan">
+                                <input class="form-control" id="complaint_ticket" type="text" name="complaint_ticket" placeholder="Masukan Nomor Pengaduan" required>
                             </div>
                             <div class="col-md-1 text-center">
                                 <button class="btn btn-primary" type="submit" id="search_submit_button">Cari</button>

@@ -189,7 +189,7 @@ class ComplaintController extends Controller
             'address'           => 'required',
             'date'              => 'required',
             'desc'              => 'required',
-            'file'              => ['required', 'max:81920'],
+            'file'              => ['required', 'max:81920', 'mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,avi,mp4,3gp,mp3'],
 
             'reporter_name'     => 'required',
             'province'          => 'required',
@@ -208,6 +208,7 @@ class ComplaintController extends Controller
             'desc.required'                 => 'Uraian Pengaduan harus diisi',
             'file.required'                 => 'Bukti harus diisi',
             'file.max'                      => 'File bukti maksimal 10 mb',
+            'file.max'                      => 'Isi file bukti dengan format yang diwajibkan',
             'reporter_name.required'        => 'Nama pelapor harus diisi',
             'province.required'             => 'Provinsi harus diisi',
             'regency.required'              => 'Kabupaten harus diisi',
