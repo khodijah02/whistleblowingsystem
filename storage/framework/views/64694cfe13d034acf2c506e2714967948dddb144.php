@@ -25,7 +25,7 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                         <li>
-                            <form action="" method="post">
+                            <form action="<?php echo e(route('logout')); ?>" method="post">
                                 <?php echo csrf_field(); ?>
                                 <button type="submit" style="all: unset; cursor: pointer;"><i data-feather="log-out"> </i><span>Keluar</span></button>
                             </form>

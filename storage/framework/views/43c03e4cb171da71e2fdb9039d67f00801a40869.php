@@ -21,7 +21,7 @@
 						</div>
 					</li>
                     <li class="sidebar-list">
-						<a class="sidebar-link sidebar-title link-nav <?php echo e(request()->is('admin/complaint') || request()->is('admin/complaint/show/*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.complaint')); ?>">
+						<a class="sidebar-link sidebar-title link-nav <?php echo e(request()->is('admin/complaint') ? 'active' : ''); ?>" href="<?php echo e(route('admin.complaint')); ?>">
 							<i data-feather="activity"> </i><span>Dashboard</span>
 						</a>
 					</li>

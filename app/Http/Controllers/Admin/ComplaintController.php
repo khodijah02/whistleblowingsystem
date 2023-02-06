@@ -129,7 +129,7 @@ class ComplaintController extends Controller
             'annual' => $annualData,
             'violation' => $violation,
         ];
-        // return dd($annualReport);
+
         return view('admin.complaint.report', $data);
     }
 

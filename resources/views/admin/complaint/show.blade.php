@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Dashboard')
+@section('title', 'Complaint Detail')
 
 @section('breadcrumb-title')
 <h3>Complaint Detail</h3>
@@ -20,7 +20,9 @@
                         <a href="{{ route('admin.complaint.download', $id) }}" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Bukti" download><i class="fa fa-download"></i></a>
                         <a href="{{ route('admin.complaint.print', $id) }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Print Laporan" target="_blank"><i class="fa fa-print"></i></a>
                         @if ($complaint->STATUS == 1)
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="proceed_complaint" data-id="{{ $id }}" data-status="2"><i class="fa fa-check"></i></button>
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Tindak Lanjut" id="proceed_complaint" data-id="{{ $id }}" data-status="2"><i class="fa fa-check"></i></button>
+                        @else
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Proses Laporan" id="swal_dummy_message"><i class="fa fa-pencil"></i></button>
                         @endif
 
                     </div>
@@ -154,6 +156,25 @@
                                     location.reload()
                                 });
                             }
+                        });
+                    }
+                })
+            });
+
+            $('#swal_dummy_message').on('click', function () {
+                Swal.fire({
+                    title: 'Proses?',
+                    text: "Laporan Akan Diproses",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sukses',
+                            text: 'Silhkan Proses Laporan',
                         });
                     }
                 })

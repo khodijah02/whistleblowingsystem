@@ -56,64 +56,63 @@
 @endsection
 
 @push('after-script')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-const monthlyChart = document.getElementById('monthly_report');
-const annualChart = document.getElementById('annual_report');
-// const labels = Utils.months({count: 7});
+    <script>
+        const monthlyChart = document.getElementById('monthly_report');
+        const annualChart = document.getElementById('annual_report');
+        // const labels = Utils.months({count: 7});
 
-var violation = JSON.parse('{!! json_encode($violation) !!}')
-var monthly = JSON.parse('{!! json_encode($monthly) !!}')
-var annual = JSON.parse('{!! json_encode($annual) !!}')
+        var violation = JSON.parse('{!! json_encode($violation) !!}')
+        var monthly = JSON.parse('{!! json_encode($monthly) !!}')
+        var annual = JSON.parse('{!! json_encode($annual) !!}')
 
-
-new Chart(monthlyChart, {
-    type: 'bar',
-    data: {
-        labels: violation,
-        datasets: [{
-            label: 'Jumlah Pengaduan',
-            data: monthly,
-            borderWidth: 1,
-            backgroundColor: '#012970'
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                max: 20,
-                ticks: {stepSize: 1}
+        new Chart(monthlyChart, {
+            type: 'bar',
+            data: {
+                labels: violation,
+                datasets: [{
+                    label: 'Jumlah Pengaduan',
+                    data: monthly,
+                    borderWidth: 1,
+                    backgroundColor: '#012970'
+                }]
             },
-        },
-    }
-});
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20,
+                        ticks: {stepSize: 1}
+                    },
+                },
+            }
+        });
 
-new Chart(annualChart, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'],
-        datasets: [{
-            label: 'Jumlah Pengaduan',
-            data: annual,
-            borderColor: '#012970',
-            fill: false,
-            tension: 0.1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                max: 20,
-                ticks: {stepSize: 1}
+        new Chart(annualChart, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'],
+                datasets: [{
+                    label: 'Jumlah Pengaduan',
+                    data: annual,
+                    borderColor: '#012970',
+                    fill: false,
+                    tension: 0.1
+                }]
             },
-        },
-    }
-});
-</script>
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20,
+                        ticks: {stepSize: 1}
+                    },
+                },
+            }
+        });
+    </script>
 @endpush
 

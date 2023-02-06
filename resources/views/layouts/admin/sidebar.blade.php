@@ -21,7 +21,7 @@
 						</div>
 					</li>
                     <li class="sidebar-list">
-						<a class="sidebar-link sidebar-title link-nav {{ request()->is('admin/complaint') || request()->is('admin/complaint/show/*') ? 'active' : '' }}" href="{{ route('admin.complaint') }}">
+						<a class="sidebar-link sidebar-title link-nav {{ request()->is('admin/complaint') ? 'active' : '' }}" href="{{ route('admin.complaint') }}">
 							<i data-feather="activity"> </i><span>Dashboard</span>
 						</a>
 					</li>
