@@ -101,13 +101,13 @@ class ComplaintController extends Controller
 
             if ($query) {
                 if ($query->STATUS == 1) {
-                    $asset = "assets/images/warning.png";
+                    $asset = "assets/images/landing/warning.png";
                     $message = 'Pengaduan Masuk';
                 } else if ($query->STATUS == 2) {
-                    $asset = "assets/images/warning.png";
+                    $asset = "assets/images/landing/warning.png";
                     $message = 'Pengaduan Diproses';
                 } else {
-                    $asset = "assets/images/checklist.png";
+                    $asset = "assets/images/landing/checklist.png";
                     $message = 'Pengaduan Diterima';
                 }
 

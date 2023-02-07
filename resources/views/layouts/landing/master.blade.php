@@ -7,10 +7,11 @@
     <meta name="description" content="mekanisme penyampaian pengaduan dugaan tindak pidana tertentu yang telah terjadi atau akan terjadi yang melibatkan pegawai dan orang lain yang yang dilakukan dalam organisasi tempatnya bekerja, dimana pelapor bukan merupakan bagian dari pelaku kejahatan yang dilaporkannya.">
     <meta name="keywords" content="whistleblowing system, rsud kota bogor, whistleblowing rsud kota bogor, pengaduan rsud kota bogor, laporan">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <title>WBS RSUD KOTA BOGOR</title>
-    @stack('before-style')
     @include('layouts.landing.css')
-    @stack('after-style')
   </head>
   <body class="landing-page d-flex flex-column justify-content-between" style="min-height: 100vh">
     <header id="header" class="header fixed-top">
@@ -41,7 +42,6 @@
     </footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    @stack('before-script')
     @include('layouts.landing.script')
     @stack('after-script')
   </body>
