@@ -99,10 +99,6 @@
 </div>
 @endsection
 
-@push('after-css')
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
-@endpush
-
 @push('after-script')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

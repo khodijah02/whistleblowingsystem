@@ -32,11 +32,11 @@
                         <?php endif; ?>
                         <div class="form-group">
                             <label class="col-form-label">Username</label>
-                            <input class="form-control" type="text" name="username" >
+                            <input class="form-control" type="text" name="username" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label class="col-form-label">Password</label>
-                            <input class="form-control" type="password" name="password" >
+                            <input class="form-control" type="password" name="password" autocomplete="off">
                         </div>
                         <div class="form-group mb-0 mt-4">
                             <button class="btn btn-primary btn-block" type="submit">Masuk</button>
