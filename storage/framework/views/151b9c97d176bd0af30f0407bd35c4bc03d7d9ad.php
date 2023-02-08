@@ -21,9 +21,9 @@
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.index' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.index')); ?>">Beranda</a></li>
-                <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.create' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.create')); ?>">Pengaduan</a></li>
-                <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.show' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.show')); ?>">Cari</a></li>
+                    <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.index' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.index')); ?>">Beranda</a></li>
+                    <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.create' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.create')); ?>">Pengaduan</a></li>
+                    <li><a class="nav-link <?php echo e(Route::currentRouteName() == 'complaint.show' ? 'active' : ''); ?>" href="<?php echo e(route('complaint.show')); ?>">Cari</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

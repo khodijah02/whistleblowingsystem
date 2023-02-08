@@ -3,15 +3,16 @@
 @section('content')
 <main id="main">
     <section class="hero d-flex align-items-center">
+        <div class="hero-bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center d-flex flex-column justify-content-center">
                     <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di </h1>
                     <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Whistleblowing System RSUD Kota Bogor</h1>
                     <p style="font-size: 2vh" class="mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
-                    <div class="text-center mx-auto text-lg-start" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.create') }}">Buat Pengaduan</a>
-                        <a class="btn btn-lg btn-outline-primary mt-3" href="{{ route('complaint.show') }}">Lihat Pengaduan</a>
+
+                    <div class="mx-auto mt-5" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
+                        <a class="btn-get-started" href="{{ route('complaint.create') }}">Buat Pengaduan</a>
                     </div>
                 </div>
             </div>
@@ -37,7 +38,7 @@
     <section class="features mt-5">
         <div class="container">
             <header class="section-header" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                <p>Kriteria Pengaduan</p>
+                <p style="color: #1c9285">Kriteria Pengaduan</p>
             </header>
             <div class="row">
                 <div class="col-lg-6" data-aos="zoom-out" data-aos-anchor-placement="top-bottom" data-aos-delay="100">
@@ -87,7 +88,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="features">
         <header class="section-header" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
             <p>Jumlah Pengaduan</p>
             <h2 class="mt-3">Bulan {{ date('F Y') }}</h2>

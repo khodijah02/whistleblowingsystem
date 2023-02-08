@@ -21,9 +21,9 @@
             </a>
             <nav id="navbar" class="navbar">
                 <ul>
-                <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.index' ? 'active' : '' }}" href="{{ route('complaint.index') }}">Beranda</a></li>
-                <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.create' ? 'active' : '' }}" href="{{ route('complaint.create') }}">Pengaduan</a></li>
-                <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.show' ? 'active' : '' }}" href="{{ route('complaint.show') }}">Cari</a></li>
+                    <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.index' ? 'active' : '' }}" href="{{ route('complaint.index') }}">Beranda</a></li>
+                    <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.create' ? 'active' : '' }}" href="{{ route('complaint.create') }}">Pengaduan</a></li>
+                    <li><a class="nav-link {{ Route::currentRouteName() == 'complaint.show' ? 'active' : '' }}" href="{{ route('complaint.show') }}">Cari</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

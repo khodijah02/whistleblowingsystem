@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/font-awesome.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/font-awesome.css')); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/themify.css')); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/vendors/bootstrap/bootstrap.min.css')); ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/style.css')); ?>">
