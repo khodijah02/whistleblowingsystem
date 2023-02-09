@@ -2,7 +2,7 @@
 
 @section('content')
 <main id="main">
-    <section class="inner-page" style="margin-top: 100px">
+    <section class="contact" style="margin-top: 100px">
         <div class="container">
             <div class="row">
                 <header class="section-header" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
@@ -17,7 +17,7 @@
                                 <div class="form-group col-md-4 mb-2 mt-4">
                                     <input id="ticket" type="hidden" name="complaint_ticket" value="{{ $complaintTicket }}" readonly>
                                     <label for="violation_type">Jenis Pelanggaran</label>
-                                    <select class="form-select py-2" name="violation_type" id="violation_type" style="border-radius: 0px;">
+                                    <select class="form-select py-2" name="violation_type" id="violation_type">
                                         <option value="">-- Pilih Jenis Pelanggaran --</option>
                                         @foreach ($violation as $v)
                                         <option value="{{ $v->ID }}">{{ $v->NAMA }}</option>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="form-group col-md-4 mb-2 mt-4">
                                     <label for="province">Provinsi</label>
-                                    <select class="form-select py-2" name="province" id="province" style="border-radius: 0px;">
+                                    <select class="form-select py-2" name="province" id="province">
                                         <option value="">-- Pilih Provinsi --</option>
                                         @foreach ($province as $p)
                                         <option value="{{ $p->ID }}">{{ $p->NAMA }}</option>
@@ -66,19 +66,19 @@
                                 </div>
                                 <div class="form-group col-md-4 mb-2 mt-4">
                                     <label for="regency">Kabupaten</label>
-                                    <select class="form-select py-2" name="regency" id="regency" style="border-radius: 0px;">
+                                    <select class="form-select py-2" name="regency" id="regency">
                                         <option value="">-- Pilih Kabupaten --</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 mb-2 mt-4">
                                     <label for="district">Kecamatan</label>
-                                    <select class="form-select py-2" name="district" id="district" style="border-radius: 0px;">
+                                    <select class="form-select py-2" name="district" id="district">
                                         <option value="">-- Pilih Kecamatan --</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 mb-2 mt-4">
                                     <label for="village">Kelurahan</label>
-                                    <select class="form-select py-2" name="village" id="village" style="border-radius: 0px;">
+                                    <select class="form-select py-2" name="village" id="village">
                                         <option value="">-- Pilih Kelurahan --</option>
                                     </select>
                                 </div>

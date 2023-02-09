@@ -97,10 +97,6 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startPush('after-css'); ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/font-awesome.css')); ?>">
-<?php $__env->stopPush(); ?>
-
 <?php $__env->startPush('after-script'); ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

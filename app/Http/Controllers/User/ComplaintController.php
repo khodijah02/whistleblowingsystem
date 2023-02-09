@@ -163,7 +163,7 @@ class ComplaintController extends Controller
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="text-center">
-                                            <img src="'.asset('assets/images/cancel.png').'" alt="" srcset="">
+                                            <img src="'.asset('assets/images/landing/cancel.png').'" alt="" srcset="">
                                             <div class="fs-3 fw-bold" style="color: #dc3545">Data Pengaduan Tidak Ditemukan</div>
                                         </div>
                                     </div>

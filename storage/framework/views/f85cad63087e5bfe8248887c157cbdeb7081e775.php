@@ -5,9 +5,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center d-flex flex-column justify-content-center">
-                    <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di </h1>
-                    <h1 style="font-size: 6vh" data-aos="fade-up" data-aos-anchor-placement="top-bottom">Whistleblowing System RSUD Kota Bogor</h1>
-                    <p style="font-size: 2vh" class="mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</p>
+                    <h1 data-aos="fade-up" data-aos-anchor-placement="top-bottom">Selamat Datang Di </h1>
+                    <h1 data-aos="fade-up" data-aos-anchor-placement="top-bottom">Whistleblowing System RSUD Kota Bogor</h1>
+                    <h2 class="mt-3" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="100">Mari Bersama-sama Menciptakan Lingkungan Kerja Yang Jujur dan Bersih, Laporkan Setiap Pelanggaran Yang Terjadi Di Lingkungan Kerja</h2>
 
                     <div class="mx-auto mt-5" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
                         <a class="btn-get-started" href="<?php echo e(route('complaint.create')); ?>">Buat Pengaduan</a>
@@ -23,11 +23,11 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
                     <div class="content">
                         <h2>DEFINISI WHISTLEBLOWING SYSTEM</h2>
-                        <p style="font-size: 2vh">Mekanisme penyampaian pengaduan dugaan tindak pidana tertentu yang telah terjadi atau akan terjadi yang melibatkan pegawai dan orang lain yang yang dilakukan dalam organisasi tempatnya bekerja, dimana pelapor bukan merupakan bagian dari pelaku kejahatan yang dilaporkannya.</p>
+                        <p>Mekanisme penyampaian pengaduan dugaan tindak pidana tertentu yang telah terjadi atau akan terjadi yang melibatkan pegawai dan orang lain yang yang dilakukan dalam organisasi tempatnya bekerja, dimana pelapor bukan merupakan bagian dari pelaku kejahatan yang dilaporkannya.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-anchor-placement="top-bottom" data-aos-delay="200">
-                    <img src="<?php echo e(asset('assets/images/landing/about.jpg')); ?>" class="img-fluid" alt="">
+                    <img src="<?php echo e(asset('assets/images/landing/asd.jpg')); ?>" class="img-fluid" alt="">
                 </div>
             </div>
         </div>
@@ -36,11 +36,11 @@
     <section class="features mt-5">
         <div class="container">
             <header class="section-header" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                <p style="color: #1c9285">Kriteria Pengaduan</p>
+                <p>Kriteria Pengaduan</p>
             </header>
             <div class="row">
-                <div class="col-lg-6" data-aos="zoom-out" data-aos-anchor-placement="top-bottom" data-aos-delay="100">
-                    <img src="<?php echo e(asset('assets/images/landing/features.png')); ?>" class="img-fluid" alt="">
+                <div class="col-lg-6 d-flex justify-content-start" data-aos="zoom-out" data-aos-anchor-placement="top-bottom" data-aos-delay="100">
+                    <img src="<?php echo e(asset('assets/images/landing/categories.jpg')); ?>" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
                     <div class="row align-self-center gy-4">
@@ -116,7 +116,7 @@ new Chart(chart, {
             label: 'Jumlah Pengaduan',
             data: complaint,
             borderWidth: 1,
-            backgroundColor: '#012970'
+            backgroundColor: '#1c9285'
         }]
     },
     options: {
