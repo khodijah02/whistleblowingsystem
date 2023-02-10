@@ -86,6 +86,9 @@
                                     <label for="reporter_address">Alamat Pelapor</label>
                                     <input class="form-control" id="reporter_address" type="text" name="reporter_address">
                                 </div>
+                                @if (config('services.recaptcha.key'))
+                                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                                @endif
                             </div>
                             <button class="btn btn-primary mt-3" type="submit" id="complaint_submit_button">Submit</button>
                         </div>
@@ -98,6 +101,7 @@
 @endsection
 
 @push('after-script')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {

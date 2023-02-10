@@ -8,6 +8,7 @@ use App\Models\Province;
 use App\Models\Violation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class ComplaintController extends Controller
@@ -183,20 +184,31 @@ class ComplaintController extends Controller
     public function validation(Request $request)
     {
         $rules = [
-            'complaint_ticket'  => 'required',
-            'violation_type'    => 'required',
-            'reported_name'     => 'required',
-            'address'           => 'required',
-            'date'              => 'required',
-            'desc'              => 'required',
-            'file'              => ['required', 'max:81920', 'mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,avi,mp4,3gp,mp3'],
+            'complaint_ticket'      => 'required',
+            'violation_type'        => 'required',
+            'reported_name'         => 'required',
+            'address'               => 'required',
+            'date'                  => 'required',
+            'desc'                  => 'required',
+            'file'                  => ['required', 'max:81920', 'mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,avi,mp4,3gp,mp3'],
 
-            'reporter_name'     => 'required',
-            'province'          => 'required',
-            'regency'           => 'required',
-            'district'          => 'required',
-            'village'           => 'required',
-            'reporter_address'  => 'required'
+            'reporter_name'         => 'required',
+            'province'              => 'required',
+            'regency'               => 'required',
+            'district'              => 'required',
+            'village'               => 'required',
+            'reporter_address'      => 'required',
+            'g-recaptcha-response'  => function ($attribute, $value, $fail) {
+                                        $secret = config('services.recaptcha.secret');
+                                        $response = $value;
+                                        $remoteIp = $_SERVER['REMOTE_ADDR'];
+                                        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$response.'&remoteip='.$remoteIp.'';
+                                        $response = \file_get_contents($url);
+                                        $response = json_decode($response);
+                                        if ($response->success == false) {
+
+                                        }
+                                       },
         ];
 
         $messages = [
