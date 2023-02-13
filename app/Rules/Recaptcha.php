@@ -26,18 +26,22 @@ class Recaptcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        $client = new Client();
-        $response = $client->post(
-                        'https://www.google.com/recaptcha/api/siteverify',
-                        [
-                            'form_params' => [
-                                'secret' => config('services.recaptcha.secret'),
-                                'response' => $value,
+        try {
+            $client = new Client();
+            $response = $client->post(
+                            'https://www.google.com/recaptcha/api/siteverify',
+                            [
+                                'form_params' => [
+                                    'secret' => config('services.recaptcha.secret'),
+                                    'response' => $value,
+                                ]
                             ]
-                        ]
-                    );
-        $body = json_decode($response->getBody());
-        return $body->success;
+                        );
+            $body = json_decode($response->getBody());
+            return $body->success;
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**
@@ -47,6 +51,6 @@ class Recaptcha implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Captcha error! Silhakan tunggu beberapa saat atau hubungi pihak RSUD Kota Bogor';
     }
 }

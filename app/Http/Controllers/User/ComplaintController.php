@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Models\Province;
 use App\Models\Violation;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -198,17 +199,7 @@ class ComplaintController extends Controller
             'district'              => 'required',
             'village'               => 'required',
             'reporter_address'      => 'required',
-            'g-recaptcha-response'  => function ($attribute, $value, $fail) {
-                                        $secret = config('services.recaptcha.secret');
-                                        $response = $value;
-                                        $remoteIp = $_SERVER['REMOTE_ADDR'];
-                                        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$response.'&remoteip='.$remoteIp.'';
-                                        $response = \file_get_contents($url);
-                                        $response = json_decode($response);
-                                        if ($response->success == false) {
-
-                                        }
-                                       },
+            'g-recaptcha-response'  => ['required', new Recaptcha],
         ];
 
         $messages = [
@@ -220,13 +211,14 @@ class ComplaintController extends Controller
             'desc.required'                 => 'Uraian Pengaduan harus diisi',
             'file.required'                 => 'Bukti harus diisi',
             'file.max'                      => 'File bukti maksimal 10 mb',
-            'file.max'                      => 'Isi file bukti dengan format yang diwajibkan',
+            'file.mimes'                    => 'Isi file bukti dengan format yang disarankan',
             'reporter_name.required'        => 'Nama pelapor harus diisi',
             'province.required'             => 'Provinsi harus diisi',
             'regency.required'              => 'Kabupaten harus diisi',
             'district.required'             => 'Kecamatan harus diisi',
             'village.required'              => 'Kelurahan harus diisi',
             'reporter_address.required'     => 'Alamat pelapor harus diisi',
+            'g-recaptcha-response.required' => 'Recaptcha harus diisi',
         ];
 
         return Validator::make($request->all(), $rules, $messages);

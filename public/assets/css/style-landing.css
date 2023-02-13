@@ -481,97 +481,10 @@ section {
   color: #fff;
 }
 
-.features .feture-tabs {
-  margin-top: 120px;
-}
-
-.features .feture-tabs h3 {
-  color: #012970;
-  font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
 @media (max-width: 768px) {
-  .features .feture-tabs h3 {
-    font-size: 28px;
-  }
-}
-
-.features .feture-tabs .nav-pills {
-  border-bottom: 1px solid #eee;
-}
-
-.features .feture-tabs .nav-link {
-  background: none;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 600;
-  color: black;
-  padding: 12px 0;
-  margin-right: 25px;
-  margin-bottom: -2px;
-  border-radius: 0;
-}
-
-.features .feture-tabs .nav-link.active {
-  color: #4154f1;
-  border-bottom: 3px solid #4154f1;
-}
-
-.features .feture-tabs .tab-content h4 {
-  font-size: 18px;
-  margin: 0;
-  font-weight: 700;
-  color: #012970;
-}
-
-.features .feture-tabs .tab-content i {
-  font-size: 24px;
-  line-height: 0;
-  margin-right: 8px;
-  color: #4154f1;
-}
-
-.features .feature-icons {
-  margin-top: 120px;
-}
-
-.features .feature-icons h3 {
-  color: #012970;
-  font-weight: 700;
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .features .feature-icons h3 {
-    font-size: 28px;
-  }
-}
-
-.features .feature-icons .content .icon-box {
-  display: flex;
-}
-
-.features .feature-icons .content .icon-box h4 {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0 0 10px 0;
-  color: #012970;
-}
-
-.features .feature-icons .content .icon-box i {
-  font-size: 44px;
-  line-height: 44px;
-  color: #0245bc;
-  margin-right: 15px;
-}
-
-.features .feature-icons .content .icon-box p {
-  font-size: 15px;
-  color: #848484;
+    .features .feature-box h3 {
+        font-weight: 400;
+      }
 }
 
 /*--------------------------------------------------------------
@@ -592,6 +505,12 @@ section {
   border-radius: 0;
 }
 
+.contact .php-email-form .is-invalid-input input,
+.contact .php-email-form .is-invalid-input textarea,
+.contact .php-email-form .is-invalid-input select {
+    border-color: red;
+}
+
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus,
 .contact .php-email-form select:focus {
@@ -609,15 +528,24 @@ section {
 
 .contact .php-email-form button[type=submit] {
   background: #1c9285;
-  border: 0;
   padding: 10px 30px;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .contact .php-email-form button[type=submit]:hover {
   background: #72b1b1;
+}
+
+.contact .alert-error {
+    padding: 20px 30px;
+    background-color: rgba(220,53,69,0.8);
+    color:#fff;
+    border-radius: 0;
+}
+
+.contact .alert-error span {
+    font-weight: 500;
 }
 
 @-webkit-keyframes animate-loading {

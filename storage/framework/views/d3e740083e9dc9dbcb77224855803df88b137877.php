@@ -15,7 +15,7 @@
                                 <input class="form-control" id="complaint_ticket" type="text" name="complaint_ticket" placeholder="Masukan Nomor Pengaduan" required>
                             </div>
                             <div class="col-md-1 text-center">
-                                <button class="btn btn-primary" type="submit" id="search_submit_button">Cari</button>
+                                <button type="submit" id="search_submit_button">Cari</button>
                             </div>
                         </div>
                     </form>

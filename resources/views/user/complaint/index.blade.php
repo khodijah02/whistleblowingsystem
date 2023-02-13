@@ -103,9 +103,8 @@
 
 @push('after-script')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-const chart = document.getElementById('complaint_chart');
+    const chart = document.getElementById('complaint_chart');
 
 var violation = JSON.parse('{!! json_encode($violation) !!}')
 var complaint = JSON.parse('{!! json_encode($complaint) !!}')
@@ -132,6 +131,7 @@ new Chart(chart, {
         },
     }
 });
+
 </script>
 @endpush
 
