@@ -483,7 +483,7 @@ section {
 
 @media (max-width: 768px) {
     .features .feature-box h3 {
-        font-weight: 400;
+        font-size: 16px;
       }
 }
 
@@ -528,6 +528,7 @@ section {
 
 .contact .php-email-form button[type=submit] {
   background: #1c9285;
+  border: 0px;
   padding: 10px 30px;
   color: #fff;
   border-radius: 0px;
